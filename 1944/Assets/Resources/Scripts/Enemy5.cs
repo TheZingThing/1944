@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy5 : MonoBehaviour {
 
-    public float speed = 4f;
-    private float health = 12f;
+    public float speed = 4.5f;
+    private float health = 25f;
 
     private float shootDelay;
 
     private bool movingToPosition = true;
-    
+
+    public EnemySpawner spawner;
+
     public GameObject bulletPrefab;
     public GameObject player;
 
@@ -22,6 +24,8 @@ public class Enemy5 : MonoBehaviour {
         shootDelay = Random.Range(1f, 1.5f);
 
         player = GameObject.Find("Player");
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+
         bulletPrefab = Resources.Load("Prefabs/Bullets/EBullet") as GameObject;
 
     }
@@ -64,36 +68,6 @@ public class Enemy5 : MonoBehaviour {
                 shootDelay = Random.Range(1f, 1.5f);
             }
         }
-
-
-
-
-
-        /*
-        if (shootDelay <= 0)
-        {
-            var dir = (player.transform.position - transform.position).normalized;
-
-            Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(dir, Vector3.up));
-
-            shootDelay = Random.Range(1f, 3.5f);
-        }
-
-        if (transform.position.z > 0 && !returning)
-        {
-            transform.position += new Vector3(0f, 0f, -speed * Time.deltaTime);
-        }
-        else
-        {
-            if (!returning)
-            {
-                returning = true;
-            }
-
-            transform.position += new Vector3(0f, 0f, speed * Time.deltaTime);
-        }
-        */
-
     }
 
     void OnCollisionEnter(Collision col)
@@ -103,5 +77,10 @@ public class Enemy5 : MonoBehaviour {
             Debug.Log("Collision");
             health -= 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }

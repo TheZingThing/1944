@@ -10,15 +10,18 @@ public class Enemy3 : MonoBehaviour {
 
     private Vector3 moveDirection;
 
+    public EnemySpawner spawner;
+
     public GameObject player;
     public GameObject bulletPrefab;
 
 	// Use this for initialization
 	void Start () {
 
-        shootDelay = Random.Range(0.5f, 1f);
+        shootDelay = Random.Range(0.75f, 1.25f);
 
         player = GameObject.Find("Player");
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
 
         bulletPrefab = Resources.Load("Prefabs/Bullets/EBullet") as GameObject;
 
@@ -34,6 +37,12 @@ public class Enemy3 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        // Destroy if off screen
+        if (transform.position.x > 16 || transform.position.x < -16)
+        {
+            Destroy(gameObject);
+        }
 
         if (health <= 0)
         {
@@ -52,7 +61,7 @@ public class Enemy3 : MonoBehaviour {
 
             Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(dir, Vector3.up));
 
-            shootDelay = Random.Range(0.5f, 1f);
+            shootDelay = Random.Range(0.75f, 1.25f);
         }
     }
 
@@ -63,5 +72,10 @@ public class Enemy3 : MonoBehaviour {
             Debug.Log("Collision");
             health -= 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }

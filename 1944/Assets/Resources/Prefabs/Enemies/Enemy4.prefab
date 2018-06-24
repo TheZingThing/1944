@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114988693452648468}
   m_Layer: 0
   m_Name: Enemy4
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408ca0f3263a5b4baaeb551e16ff890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 4.5
+  spawner: {fileID: 0}
   bulletPrefab: {fileID: 0}
   player: {fileID: 0}

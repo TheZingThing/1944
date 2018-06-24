@@ -11,6 +11,8 @@ public class Enemy4 : MonoBehaviour {
 
     private bool returning = false;
 
+    public EnemySpawner spawner;
+
     public GameObject bulletPrefab;
     public GameObject player;
 
@@ -21,6 +23,8 @@ public class Enemy4 : MonoBehaviour {
         shootDelay = Random.Range(1.5f, 3.5f);
 
         player = GameObject.Find("Player");
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+
         bulletPrefab = Resources.Load("Prefabs/Bullets/EBullet") as GameObject;
 
     }
@@ -28,6 +32,12 @@ public class Enemy4 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
+        // Destroy if off screen
+        if (transform.position.z > 10)
+        {
+            Destroy(gameObject);
+        }
 
         shootDelay -= Time.deltaTime;
 
@@ -60,8 +70,6 @@ public class Enemy4 : MonoBehaviour {
 
             transform.position += new Vector3(0f, 0f, speed * Time.deltaTime);
         }
-        
-
     }
 
     void OnCollisionEnter(Collision col)
@@ -71,6 +79,11 @@ public class Enemy4 : MonoBehaviour {
             Debug.Log("Collision");
             health -= 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }
 

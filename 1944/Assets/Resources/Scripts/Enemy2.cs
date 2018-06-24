@@ -5,9 +5,11 @@ using UnityEngine;
 public class Enemy2 : MonoBehaviour {
 
     public float speed = 3f;
-    private float health = 10f;
+    private float health = 8f;
 
     private float shootDelay;
+
+    public EnemySpawner spawner;
 
     public GameObject bulletPrefab;
     public GameObject player;
@@ -18,12 +20,20 @@ public class Enemy2 : MonoBehaviour {
         shootDelay = Random.Range(1f, 3f);
 
         player = GameObject.Find("Player");
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+
         bulletPrefab = Resources.Load("Prefabs/Bullets/EBullet") as GameObject;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        // Destroy if off screen
+        if (transform.position.z >= 10)
+        {
+            Destroy(gameObject);
+        }
 
         shootDelay -= Time.deltaTime;
 
@@ -54,5 +64,10 @@ public class Enemy2 : MonoBehaviour {
             Debug.Log("Collision");
             health -= 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }

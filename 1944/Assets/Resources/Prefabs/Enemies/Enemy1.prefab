@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114631575630686734}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,4 +127,5 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1366466715601880, guid: 512920e16dca66947868254f0a8ea7a3,
     type: 2}
   player: {fileID: 0}
-  speed: 3
+  spawner: {fileID: 0}
+  speed: 5

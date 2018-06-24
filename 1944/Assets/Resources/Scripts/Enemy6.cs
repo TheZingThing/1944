@@ -14,17 +14,28 @@ public class Enemy6 : MonoBehaviour {
 
     private bool hasLocked = false;
 
+    public EnemySpawner spawner;
+
     // Use this for initialization
     void Start()
     {
 
+        transform.rotation = Quaternion.LookRotation(new Vector3(0f, 0f, -1f));
+
         player = GameObject.Find("Player").transform;
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        // Destroy if off screen
+        if (transform.position.z <= -10)
+        {
+            Destroy(gameObject);
+        }
 
         if (health <= 0)
         {
@@ -110,5 +121,10 @@ public class Enemy6 : MonoBehaviour {
         previousPlayerPos = player.position;
 
         transform.LookAt(previousPlayerPos);
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }

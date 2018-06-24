@@ -12,7 +12,9 @@ public class Enemy1 : MonoBehaviour {
 
     Vector3 previousPlayerPos;
 
-    public float speed = 3f;
+    public EnemySpawner spawner;
+
+    public float speed = 5f;
 
     bool hasShot = false;
     bool isReturning = false;
@@ -21,6 +23,7 @@ public class Enemy1 : MonoBehaviour {
 	void Start () {
 
         player = GameObject.Find("Player").transform;
+        spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         bulletPrefab = Resources.Load("Prefabs/Bullets/EBullet") as GameObject;
 
         LookAtPlayer();
@@ -83,5 +86,10 @@ public class Enemy1 : MonoBehaviour {
         previousPlayerPos = player.position;
 
         transform.LookAt(previousPlayerPos);
+    }
+
+    private void OnDestroy()
+    {
+        spawner.enemyCount--;
     }
 }
