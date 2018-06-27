@@ -28,10 +28,12 @@ public class Enemy3 : MonoBehaviour {
         if (transform.position.x < 0)
         {
             moveDirection = Vector3.right;
+            transform.rotation = Quaternion.LookRotation(moveDirection);
         }
         else
         {
             moveDirection = -Vector3.right;
+            transform.rotation = Quaternion.LookRotation(moveDirection);
         }
 	}
 	
@@ -69,7 +71,6 @@ public class Enemy3 : MonoBehaviour {
     {
         if (col.gameObject.tag == "PBullet")
         {
-            Debug.Log("Collision");
             health -= 1;
         }
     }

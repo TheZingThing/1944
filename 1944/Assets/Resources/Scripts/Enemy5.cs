@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy5 : MonoBehaviour {
 
     public float speed = 4.5f;
-    private float health = 25f;
+    private float health = 50f;
 
     private float shootDelay;
 
@@ -15,8 +15,6 @@ public class Enemy5 : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public GameObject player;
-
-    private Vector3 originalPosition;
 
     // Use this for initialization
     void Start()
@@ -48,7 +46,6 @@ public class Enemy5 : MonoBehaviour {
         if (transform.position == new Vector3(0f, 0f, 4.75f))
         {
             movingToPosition = false;
-            originalPosition = transform.position;
         }
 
         if (!movingToPosition)
@@ -74,7 +71,6 @@ public class Enemy5 : MonoBehaviour {
     {
         if (col.gameObject.tag == "PBullet")
         {
-            Debug.Log("Collision");
             health -= 1;
         }
     }

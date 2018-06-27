@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour {
 
     [HideInInspector]
     public int enemyCount = 0;
+    private int prevWaveIndex;
 
     // Use this for initialization
     void Start () {
@@ -34,25 +35,32 @@ public class EnemySpawner : MonoBehaviour {
             // Common waves (Easy-Moderate Difficulty) 50% chance
             if (waveIndex < 51)
             {
-                waveIndex = Random.Range(0, 5);
+                waveIndex = Random.Range(0, 11);
             }
-            // Uncommon waves (Moderate Difficulty) 25% chance
-            else if (waveIndex < 76)
+            // Uncommon waves (Moderate Difficulty) 30% chance
+            else if (waveIndex < 81)
             {
-                waveIndex = Random.Range(5, 8);
+                waveIndex = Random.Range(11, 15);
             }
             // Rare waves (Moderate-Hard Difficulty) 15% chance
-            else if (waveIndex < 91)
+            else if (waveIndex < 96)
             {
-                waveIndex = Random.Range(8, 11);
+                waveIndex = Random.Range(15, 18);
             }
-            // Boss waves (Hard Difficulty) 10% chance
+            // Boss waves (Hard Difficulty) 5% chance
             else
             {
-                waveIndex = Random.Range(11, 12);
+                waveIndex = Random.Range(18, 20);
             }
 
             Debug.Log(waveIndex.ToString());
+
+            if (prevWaveIndex == waveIndex)
+            {
+                return;
+            }
+
+            prevWaveIndex = waveIndex;
 
             #endregion
 

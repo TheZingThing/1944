@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class PlayerControls : MonoBehaviour {
         if (health <= 0)
         {
             Debug.Log("Player died");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         // Movement

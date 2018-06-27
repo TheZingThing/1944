@@ -75,7 +75,6 @@ public class Enemy1 : MonoBehaviour {
     {
         if (col.gameObject.tag == "PBullet")
         {
-            Debug.Log("Collision");
             health -= 1;
         }
     }

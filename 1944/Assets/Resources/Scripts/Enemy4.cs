@@ -19,7 +19,9 @@ public class Enemy4 : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        
+
+        transform.rotation = Quaternion.LookRotation(new Vector3(0f, 0f, -1f));
+
         shootDelay = Random.Range(1.5f, 3.5f);
 
         player = GameObject.Find("Player");
@@ -70,13 +72,17 @@ public class Enemy4 : MonoBehaviour {
 
             transform.position += new Vector3(0f, 0f, speed * Time.deltaTime);
         }
+
+        if (returning)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(0f, 0f, 1f));
+        }
     }
 
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "PBullet")
         {
-            Debug.Log("Collision");
             health -= 1;
         }
     }
